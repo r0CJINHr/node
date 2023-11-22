@@ -4,6 +4,7 @@ const path = require("path");
 const port = "3000";
 const app = express();
 const fs = require("fs");
+const myRoute = require("../node/routers/index-routers");
 const ejs = require("ejs");
 
 app.set("view engine", "ejs");
@@ -26,28 +27,7 @@ app.use(
     path.join(__dirname, "/public/CSS/bootstrap-5.3.2/dist/css/bootstrap.css")
   )
 );
-
-app.get("/", function (req, res) {
-  // res.sendFile(__dirname + "/public/index.html");
-  addLine("ping to / ");
-});
-
-app.post("/test", function (req, res) {
-  addLine("test.post");
-  console.log("прошли в папку test");
-  console.log(req.body);
-  res.end("прошли post test");
-});
-
-app.get("env") == "production";
-console.log(app.get("env"));
-if (app.get("env") == "production") {
-  app.use((err, req, res) => {
-    res.status(err.status);
-    res.send(err.message);
-  });
-}
-
+app.use(myRoute);
 function addLine(line) {
   line = line + " timestamp " + new Date().toLocaleString();
   fs.appendFile(
@@ -63,6 +43,15 @@ app.use((req, res, next) => {
   err.code = 404;
   next(err);
 });
+
+app.get("env") == "production";
+console.log(app.get("env"));
+if (app.get("env") == "production") {
+  app.use((err, req, res) => {
+    res.status(err.status);
+    res.send(err.message);
+  });
+}
 
 const uri =
   "https://ru.hostings.info/upload/images/2021/12/e11044b915dc39afc3004430606bd6d1.jpg";
