@@ -5,7 +5,6 @@ const port = "3000";
 
 app.get("/as", function (req, res) {
   res.end("Hello everybody!");
-  console.log(res);
 });
 
 app.listen(port, () => {
