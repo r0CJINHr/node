@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="index.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, minimum-scale=1, width=device-width"
+    />
+    <title>Error 404</title>
+  </head>
+  <body>
+    <header class="header"><%- include ("partials/header.ejs")%></header>
+    <img src="<%=uri%>" />
+    <h3><%=err.message%></h3>
+
+    <p>The requested URL was not found on this server.</p>
+    <footer class="footer"><%- include ("partials/footer.ejs")%></footer>
+  </body>
+</html>
