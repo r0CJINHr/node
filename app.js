@@ -69,5 +69,5 @@ if (app.get("env") != "development") {
 
 app.listen(port, () => {
   console.log("listening on port: " + port);
-  addLine("Server started");
+  addLine("lServer started");
 });
