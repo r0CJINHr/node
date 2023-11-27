@@ -84,24 +84,24 @@ sequelize
   .then((result) => {})
   .catch((err) => console.log(err));
 
-User.create({
-  name: "Tom",
-  age: 35,
-})
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => console.log(err));
+// User.create({
+//   name: "Tom",
+//   age: 35,
+// })
+//   .then((res) => {
+//     console.log(res);
+//   })
+//   .catch((err) => console.log(err));
 
-User.create({
-  name: "Bob",
-  age: 31,
-})
-  .then((res) => {
-    const user = { id: res.id, name: res.name, age: res.age };
-    console.log(user);
-  })
-  .catch((err) => console.log(err));
+// User.create({
+//   name: "Bob",
+//   age: 31,
+// })
+//   .then((res) => {
+//     const user = { id: res.id, name: res.name, age: res.age };
+//     console.log(user);
+//   })
+//   .catch((err) => console.log(err));
 
 const uri =
   "https://ru.hostings.info/upload/images/2021/12/e11044b915dc39afc3004430606bd6d1.jpg";
@@ -116,6 +116,11 @@ if (app.get("env") != "development") {
     console.log(app.get("env"), err.code, err.message);
   });
 }
+User.findAll({ raw: true })
+  .then((users) => {
+    console.log(users);
+  })
+  .catch((err) => console.log(err));
 
 app.listen(port, () => {
   console.log("listening on port: " + port);
