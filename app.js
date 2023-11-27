@@ -6,11 +6,21 @@ const app = express();
 const fs = require("fs");
 const myRoute = require("../node/routers/index-routers");
 const ejs = require("ejs");
+const Sequelize = require("sequelize");
+const sqlite = require("sqlite3");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 console.log(__dirname + "/public/favicon.ico");
+
+const sequelize = new Sequelize({
+  dialect: "sqlite",
+  storage: "test.db",
+  define: {
+    timestamps: false,
+  },
+});
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -52,6 +62,46 @@ if (app.get("env") == "production") {
     res.send(err.message);
   });
 }
+const User = sequelize.define("user", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false,
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  age: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+});
+
+sequelize
+  .sync()
+  .then((result) => {})
+  .catch((err) => console.log(err));
+
+User.create({
+  name: "Tom",
+  age: 35,
+})
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => console.log(err));
+
+User.create({
+  name: "Bob",
+  age: 31,
+})
+  .then((res) => {
+    const user = { id: res.id, name: res.name, age: res.age };
+    console.log(user);
+  })
+  .catch((err) => console.log(err));
 
 const uri =
   "https://ru.hostings.info/upload/images/2021/12/e11044b915dc39afc3004430606bd6d1.jpg";
