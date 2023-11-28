@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const register = require("../controllers/register");
 
 router.get("/", function (req, res) {
   res.sendFile(__dirname + "/public/index.html");
@@ -12,7 +13,7 @@ router.post("/test", function (req, res) {
   res.end("прошли post test");
 });
 
+router.get("/register", register.form);
 router.post("/register", function (req, res) {});
-router.get("/register", function (req, res) {});
 
 module.exports = router;
