@@ -9,14 +9,6 @@
   <body>
     <header class="header"><%- include ("partials/header.ejs")%></header>
     <form action="">
-      <label for="username">Имя</label>
-      <input
-        type=""
-        name="username"
-        id="username"
-        placeholder="username"
-        required
-      />
       <br />
       <label for="email">Электронная почта</label>
       <input
@@ -36,6 +28,8 @@
         required
       />
       <br />
+      <label for="age">Возраст</label>
+      <input type="number" name="age" id="age" placeholder="age" required />
       <input type="submit" value="Отправить" />
     </form>
     <footer class="footer"><%- include ("partials/footer.ejs")%></footer>
