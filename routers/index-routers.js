@@ -12,8 +12,13 @@ router.post("/test", function (req, res) {
   console.log(req.body);
   res.end("прошли post test");
 });
+router.get("/entries", entries.list);
+router.post("/entry", entry.forma);
 
 router.get("/register", register.form);
 router.post("/register", register.submit);
+
+router.get("/login", login.form);
+router.post("/login", login.submit);
 
 module.exports = router;
