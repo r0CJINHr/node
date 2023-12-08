@@ -11,7 +11,7 @@ class User {
   constructor() {}
   static async create(dataForm, cb) {
     try {
-      const salt = await bcrypt.getSalt(10);
+      const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(dataForm.password, salt);
       const sql1 =
         "INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)";
@@ -33,3 +33,4 @@ class User {
     if (result) return cb(user); // todo check
   }
 }
+module.exports = User;

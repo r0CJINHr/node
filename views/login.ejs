@@ -4,15 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%=title%></title>
+    <title>Document</title>
   </head>
   <body>
     <header class="header"><%- include ("partials/header.ejs")%></header>
-    <form action="#" method="post" name="user">
-      <label for="name">Имя</label>
-      <input type="name" name="name" id="name" placeholder="name" required />
-      <br />
-
+    <form action="">
       <label for="email">Электронная почта</label>
       <input
         type="email"
@@ -21,7 +17,7 @@
         placeholder="email"
         required
       />
-      <br />
+
       <label for="password">Пароль</label>
       <input
         type="password"
@@ -30,10 +26,8 @@
         placeholder="password"
         required
       />
-      <br />
-      <label for="age">Возраст</label>
-      <input type="number" name="age" id="age" placeholder="age" required />
-      <input type="submit" value="Регистрация" />
+
+      <input type="submit" value="Вход" />
     </form>
     <footer class="footer"><%- include ("partials/footer.ejs")%></footer>
   </body>
