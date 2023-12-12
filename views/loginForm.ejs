@@ -8,11 +8,11 @@
   </head>
   <body>
     <header class="header"><%- include ("partials/header.ejs")%></header>
-    <form action="">
+    <form action="/login" method="post">
       <label for="email">Электронная почта</label>
       <input
         type="email"
-        name="email"
+        name="loginForm[email]"
         id="email"
         placeholder="email"
         required
@@ -21,7 +21,7 @@
       <label for="password">Пароль</label>
       <input
         type="password"
-        name="password"
+        name="loginForm[password]"
         id="password"
         placeholder="password"
         required

@@ -8,7 +8,7 @@
   </head>
   <body>
     <header class="header"><%- include ("partials/header.ejs")%></header>
-    <form action="#" method="post" name="user">
+    <form action="/register" method="post" name="user">
       <label for="name">Имя</label>
       <input type="name" name="name" id="name" placeholder="name" required />
       <br />
@@ -16,7 +16,7 @@
       <label for="email">Электронная почта</label>
       <input
         type="email"
-        name="email"
+        name="dataForm[email]"
         id="email"
         placeholder="email"
         required
