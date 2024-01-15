@@ -8,6 +8,7 @@ const fs = require("fs");
 const myRoute = require("../node/routers/index-routers");
 const ejs = require("ejs");
 const userSession = require("./middleware/user_session");
+const messages = require("./middleware/messages");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -31,7 +32,10 @@ app.use(
     path.join(__dirname, "/public/CSS/bootstrap-5.3.2/dist/css/bootstrap.css")
   )
 );
+app.use(messages);
 app.use(myRoute);
+app.use(userSession);
+
 function addLine(line) {
   line = line + " timestamp " + new Date().toLocaleString();
   fs.appendFile(

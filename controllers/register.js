@@ -14,6 +14,6 @@ exports.submit = (req, res) => {
         if (err) return next(err);
       });
     }
-    res.redirect("/a");
+    res.redirect("/");
   });
 };

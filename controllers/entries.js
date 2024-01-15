@@ -26,3 +26,40 @@ exports.post = (req, res, next) => {
     return next(err);
   }
 };
+
+exports.delete = async (req, res, next) => {
+  const entryId = req.params.id;
+
+  Entry.delete(entryId, async (err) => {
+    if (err) {
+      return next(err);
+    }
+    await res.redirect("/posts");
+  });
+};
+
+exports.updateForm = (req, res) => {
+  const entryId = req.params.id;
+  Entry.getEntryById(entryId, async (err, entry) => {
+    if (err) {
+      console.log(err);
+      return res.redirect("posts");
+    }
+    await res.render("update", { title: "Изменение поста", entry: entry });
+  });
+};
+
+exports.updateSubmit = async (req, res, next) => {
+  const entryId = req.params.id;
+  const newData = {
+    title: req.body.entry.title,
+    content: req.body.entry.content,
+  };
+
+  Entry.update(entryId, newData, (err) => {
+    if (err) {
+      return next(err);
+    }
+  });
+  await res.redirect("/posts");
+};
