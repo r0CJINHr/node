@@ -33,8 +33,8 @@ app.use(
   )
 );
 app.use(messages);
-app.use(myRoute);
 app.use(userSession);
+app.use(myRoute);
 
 function addLine(line) {
   line = line + " timestamp " + new Date().toLocaleString();

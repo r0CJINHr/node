@@ -7,7 +7,7 @@
     <title><%=title%></title>
   </head>
   <body>
-    <header class="header"><%- include ("partials/header.ejs")%></header>
+    <header class="header"><%- include ("partials/menu.ejs")%></header>
     <form action="/register" method="post" name="user">
       <label for="name">Имя</label>
       <input type="name" name="name" id="name" placeholder="name" required />
@@ -16,7 +16,7 @@
       <label for="email">Электронная почта</label>
       <input
         type="email"
-        name="dataForm[email]"
+        name="email"
         id="email"
         placeholder="email"
         required

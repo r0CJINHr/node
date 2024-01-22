@@ -8,7 +8,12 @@ const validate = require("../middleware/validate");
 router.get("/posts", entries.list);
 
 router.post("/post", entries.form);
-router.post("/post", validate.required("entry[title]"), entries.post);
+router.post(
+  "/post",
+  validate.required("title"),
+  validate.required("content"),
+  entries.post
+);
 
 router.get("/update/:id", entries.updateForm);
 router.post("/update/:id", entries.updateSubmit);
@@ -16,7 +21,12 @@ router.post("/update/:id", entries.updateSubmit);
 router.get("/delete/:id", entries.delete);
 
 router.get("/register", register.form);
-router.post("/register", register.submit);
+router.post(
+  "/register",
+  validate.required("email"),
+  validate.lengthAbove("name", 4),
+  register.submit
+);
 
 router.get("/login", login.form);
 router.post("/login", login.submit);
