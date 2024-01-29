@@ -1,3 +1,4 @@
+const logger = require("../logger/index");
 const Entry = require("../models/entry");
 
 exports.list = (req, res, next) => {
@@ -8,6 +9,7 @@ exports.list = (req, res, next) => {
 };
 
 exports.form = (req, res, next) => {
+  logger.error("enter form entry");
   res.render("post", { title: "Post" });
 };
 exports.post = (req, res, next) => {

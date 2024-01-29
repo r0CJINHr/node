@@ -14,7 +14,7 @@ module.exports = function (req, res, next) {
   res.error = (msg) => {
     return res.pushFunction(msg, "error");
   };
-  res.locals.messages = req.session.messages(res);
+  res.locals.messages = req.session.messages || [];
   res.locals.removeMessages = function () {
     req.session.messages = [];
   };
