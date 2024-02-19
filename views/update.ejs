@@ -6,17 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/bootstrap.css" />
-    <link rel="stylesheet" href="./style.css" />
-
     <script defer src="/js/bootstrap.js"></script>
+    <style>
+      .header-link,
+      .navbar-brand {
+        color: white;
+      }
+    </style>
   </head>
   <body>
-    <header><%- include ('./partials/menu') %></header>
+    <header><%- include ('./partials/header') %></header>
     <div class="container mt-3 mb-3">
       <h1><%= title %></h1>
-      <p>Заполните форму ниже чтобы добавить новый пост</p>
       <%#- include ('./partials/messages') %>
-      <form action="/post" method="post">
+      <p>Заполните форму ниже чтобы изменить пост.</p>
+      <form method="post" action="/update/<%= entry.id %>">
         <div class="mb-3">
           <label for="z" class="form-label">Заголовок поста</label>
           <input
@@ -25,17 +29,15 @@
             name="entry[title]"
             id="z"
             aria-describedby="helpId"
+            value="<%= entry.title %>"
             placeholder="Заголовок поста"
           />
         </div>
         <div class="mb-3">
           <label for="s" class="form-label">Текст заметки</label>
-          <textarea
-            class="form-control"
-            name="entry[content]"
-            id="s"
-            rows="3"
-          ></textarea>
+          <textarea class="form-control" name="entry[content]" id="s" rows="3">
+<%= entry.content %></textarea
+          >
         </div>
         <button type="submit" value="Post" class="btn btn-primary">
           Отправить

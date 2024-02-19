@@ -3,11 +3,12 @@ const session = require("express-session");
 const favicon = require("express-favicon");
 const path = require("path");
 const port = "3000";
+
+const userSession = require("./middleware/user_session");
 const app = express();
 const fs = require("fs");
 const myRoute = require("../node/routers/index-routers");
 const ejs = require("ejs");
-const userSession = require("./middleware/user_session");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -15,11 +16,16 @@ app.set("views", path.join(__dirname, "views"));
 console.log(__dirname + "/public/favicon.ico");
 
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(express.static(path.join(__dirname, "images")));
 app.use(express.static(path.join(__dirname, "views")));
 
-app.use(session({ secret: "aboba", resave: false, saveUninitialized: true }));
+app.use(
+  session({
+    secret: "aboba",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 app.use(favicon(__dirname + "/public/favicon.ico"));
 
@@ -31,7 +37,10 @@ app.use(
     path.join(__dirname, "/public/CSS/bootstrap-5.3.2/dist/css/bootstrap.css")
   )
 );
+
+app.use(userSession);
 app.use(myRoute);
+
 function addLine(line) {
   line = line + " timestamp " + new Date().toLocaleString();
   fs.appendFile(
@@ -73,5 +82,5 @@ if (app.get("env") != "development") {
 
 app.listen(port, () => {
   console.log("listening on port: " + port);
-  addLine("lServer started");
+  addLine("Server started");
 });

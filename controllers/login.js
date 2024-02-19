@@ -5,22 +5,22 @@ exports.form = (req, res) => {
 };
 
 exports.submit = (req, res, next) => {
-  User.authenfication(req.body.loginForm, (err, data) => {
-    if (err) return next(err);
+  User.authentificate(req.body, (error, data) => {
+    if (error) return next(error);
     if (!data) {
-      console.log("email or password incorrect");
+      console.log("Имя или пароль неверный");
       res.redirect("back");
     } else {
       req.session.userEmail = data.email;
       req.session.userName = data.name;
-
-      res.redirect("/a");
+      res.redirect("/");
     }
   });
 };
 
-exports.logout = function (req, res) {
+exports.logout = (req, res, next) => {
   req.session.destroy((err) => {
-    if (err) return next;
+    if (err) return next(err);
+    res.redirect("/");
   });
 };

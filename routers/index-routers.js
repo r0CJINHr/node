@@ -3,10 +3,21 @@ const router = express.Router();
 const register = require("../controllers/register");
 const login = require("../controllers/login");
 const entries = require("../controllers/entries");
+const validate = require("../middleware/validate");
 
-router.get("/a", entries.list);
-// router.post("/entry", entry.form);
-// router.post("/post", entries.post);
+router.get("/", (req, res) => {
+  res.render("index", {
+    title: "Главная",
+  });
+});
+router.get("/posts", entries.list);
+router.get("/post", entries.form);
+router.post("/post", entries.submit);
+
+router.get("/update/:id", entries.updateForm);
+router.post("/update/:id", entries.updateSubmit);
+
+router.get("/delete/:id", entries.delete);
 
 router.get("/register", register.form);
 router.post("/register", register.submit);
