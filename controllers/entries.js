@@ -1,3 +1,4 @@
+const logger = require("../logger/index");
 const Entry = require("../models/entry");
 
 exports.list = (req, res, next) => {
@@ -40,7 +41,6 @@ exports.delete = async (req, res, next) => {
     if (err) {
       return next(err);
     }
-
     await res.redirect("/posts");
   });
 };
@@ -68,6 +68,5 @@ exports.updateSubmit = async (req, res, next) => {
       return next(err);
     }
   });
-
   await res.redirect("/posts");
 };

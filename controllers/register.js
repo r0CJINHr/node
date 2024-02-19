@@ -19,5 +19,7 @@ exports.submit = (req, res, next) => {
         res.redirect("/");
       });
     }
+
+    const token = jwt.sign()
   });
 };

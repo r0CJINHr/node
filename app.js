@@ -8,6 +8,9 @@ const userSession = require("./middleware/user_session");
 const app = express();
 const fs = require("fs");
 const myRoute = require("../node/routers/index-routers");
+const messages = require("./middleware/messages");
+const logger = require("./routers/index-routers");
+
 const ejs = require("ejs");
 
 app.set("view engine", "ejs");
