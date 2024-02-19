@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const logger = require("../logger");
 
 exports.form = (req, res) => {
   res.render("registerForm", { title: "Register" });
@@ -20,6 +21,15 @@ exports.submit = (req, res, next) => {
       });
     }
 
-    const token = jwt.sign()
+    const token = jwt.sign(
+      {
+        username: req.body.name,
+      },
+      "aboba",
+      {
+        expiresIn: 60 * 60,
+      }
+    );
+    logger.info("Token подготовлен : " + token);
   });
 };

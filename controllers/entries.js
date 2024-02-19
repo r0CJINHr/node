@@ -26,10 +26,10 @@ exports.submit = (req, res, next) => {
     };
 
     Entry.create(entry);
-    // logger.info("Пользователь создал новый пост");
+    logger.info("Пользователь создал новый пост");
     res.redirect("/posts");
   } catch (err) {
-    // logger.error(`Произошла ошибка: ${err}`);
+    logger.error(`Произошла ошибка: ${err}`);
     return next(err);
   }
 };
