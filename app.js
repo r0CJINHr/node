@@ -10,7 +10,10 @@ const fs = require("fs");
 const myRoute = require("../node/routers/index-routers");
 const messages = require("./middleware/messages");
 const logger = require("./routers/index-routers");
-
+require("dotenv").config;
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
+const passportFunction = require("./middleware/passport");
 const ejs = require("ejs");
 
 app.set("view engine", "ejs");
@@ -29,7 +32,9 @@ app.use(
     saveUninitialized: true,
   })
 );
-
+app.use(cookieParser());
+app.use(passport.initialize());
+passportFunction(passport);
 app.use(favicon(__dirname + "/public/favicon.ico"));
 
 app.use(express.json());

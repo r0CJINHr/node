@@ -23,13 +23,20 @@ exports.submit = (req, res, next) => {
 
     const token = jwt.sign(
       {
-        username: req.body.name,
+        name: req.body.name,
       },
-      "aboba",
+      process.env.JWTTOCENSECRET || "aboba",
       {
         expiresIn: 60 * 60,
       }
     );
-    logger.info("Token подготовлен : " + token);
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      maxAge: 60 * 60,
+    });
+    logger.info("Токен подготовлен: " + token);
+    // Добавляем токен в ответ
+
+    res.redirect("/");
   });
 };

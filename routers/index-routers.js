@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const register = require("../controllers/register");
+const passport = require("passport");
 const login = require("../controllers/login");
 const entries = require("../controllers/entries");
 const validate = require("../middleware/validate");
@@ -12,7 +13,12 @@ router.get("/", (req, res) => {
 });
 router.get("/posts", entries.list);
 router.get("/post", entries.form);
-router.post("/post", entries.submit);
+router.post(
+  "/post",
+  passport.authenticate("jwt", { session: false }),
+  validate.required("[entry[title]]"),
+  entries.submit
+);
 
 router.get("/update/:id", entries.updateForm);
 router.post("/update/:id", entries.updateSubmit);
