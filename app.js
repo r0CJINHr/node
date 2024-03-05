@@ -13,7 +13,8 @@ const logger = require("./routers/index-routers");
 require("dotenv").config;
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-const passportFunction = require("./middleware/passport");
+// const passportFunction = require("./middleware/passportJwt");
+const passportFunction = require("./middleware/passportYandex");
 const ejs = require("ejs");
 
 app.set("view engine", "ejs");
@@ -34,6 +35,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(passport.initialize());
+app.use(passport.session());
 passportFunction(passport);
 app.use(favicon(__dirname + "/public/favicon.ico"));
 
