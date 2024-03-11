@@ -5,6 +5,7 @@ const passport = require("passport");
 const login = require("../controllers/login");
 const entries = require("../controllers/entries");
 const validate = require("../middleware/validate");
+const ensureAuthenticated = require("../middleware/isAuthenticate");
 
 router.get("/", (req, res) => {
   res.render("index", {
@@ -12,12 +13,27 @@ router.get("/", (req, res) => {
   });
 });
 router.get("/posts", entries.list);
-router.get("/post", entries.form);
+router.get("/post", ensureAuthenticated, entries.form);
 router.post(
   "/post",
-  passport.authenticate("jwt", { session: false }),
+  ensureAuthenticated,
+
   validate.required("[entry[title]]"),
   entries.submit
+);
+
+router.get(
+  "/auth/yandex",
+  passport.authenticate("yandex"),
+  function (req, res) {}
+);
+
+router.get(
+  "/auth/yandex/callback",
+  passport.authenticate("yandex", { failureRedirect: "/login" }),
+  function (req, res) {
+    res.redirect("/");
+  }
 );
 
 router.get("/update/:id", entries.updateForm);
